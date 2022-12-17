@@ -1,0 +1,14 @@
+{% load static %}
+
+<body>
+<header>
+    <a href="{% url 'index' %}">Главная</a>
+    <a href="{% url 'product' %}">Товары</a>
+    <a href="{% url 'about' %}">О нас</a>
+    <a href="{% url 'contact' %}">Контакты</a>
+
+</header>
+
+{% block content %}{%  endblock %}
+
+</body>
