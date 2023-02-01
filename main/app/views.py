@@ -11,7 +11,6 @@ from django.contrib.auth.models import User
 
 
 class Index(TemplateView):
-
     template_name = 'index.html'
 
 
