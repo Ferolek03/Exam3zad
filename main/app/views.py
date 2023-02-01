@@ -6,11 +6,12 @@ from django.views.generic.edit import CreateView
 
 from .forms import ProductForm
 from .models import Product
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 
 
 class Index(TemplateView):
+
     template_name = 'index.html'
 
 
@@ -40,3 +41,20 @@ class Login(LoginView):
     template_name = 'login.html'
     model = User
     success_url = '/'
+
+
+class Logout(LoginRequiredMixin, LogoutView):
+    template_name = 'logged_out.html'
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Вы успешно зарегестрировались')
+            return redirect('/login')
+        else:
+            messages.error(request, 'Ошибка регистрации')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'main/register.html', {"form": form})
