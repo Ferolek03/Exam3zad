@@ -8,7 +8,6 @@ from .forms import ProductForm
 from .models import Product
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
-from .forms import UserCreateForm
 
 class Index(TemplateView):
     template_name = 'index.html'
@@ -45,14 +44,3 @@ class Login(LoginView):
 class Logout(LoginRequiredMixin, LogoutView):
     template_name = 'logged_out.html'
 
-class RegisterFormView(FormView):
-    form_class = UserCreateForm
-    success_url = '/login'
-    template_name = "register.html"
-
-    def form_valid(self, form):
-        form.save()
-        return super(RegisterFormView, self).form_valid(form)
-
-    def form_invalid(self, form):
-        return super(RegisterFormView, self).form_invalid(form)

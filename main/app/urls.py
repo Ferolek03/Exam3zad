@@ -2,7 +2,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from .views import *
-from . import views
 
 urlpatterns = [
                   path('', Index.as_view(), name='index'),
@@ -12,5 +11,4 @@ urlpatterns = [
                   path('add_product', AddProduct.as_view(), name='add_product'),
                   path('login', Login.as_view(), name='login'),
                   path('logged_out', Logout.as_view(), name='logged_out'),
-                  path('register', views.RegisterFormView.as_view()),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
